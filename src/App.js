@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import AddMovie from "./Component/AddMovie.js";
 import MovieList from "./Component/MovieList.js";
 import NavBar from "./Component/NavBar.js";
+import Details from "./Component/Details.js";
+import "./App.css";
 
 
 export default function App() {
@@ -15,7 +18,7 @@ export default function App() {
       posterUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhYjUIu2o5v5u3rfJpCq5Cz0Q9WK--XdYxai_N2d0ImohPiIOp",
       rate: 4,
-
+     trailer:"https://www.youtube.com/embed/kVrqfYjkTdQ",
       id: 1
     },
     {
@@ -25,7 +28,7 @@ export default function App() {
       posterUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkmMH-bEDUS2TmK8amBqgIMgrfzN1_mImChPuMrunA1XjNTSKm",
       rate: 3,
-
+      trailer:"https://www.youtube.com/embed/NmzuHjWmXOc",
       id: 2
     },
     {
@@ -35,7 +38,7 @@ export default function App() {
       posterUrl:
         "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY1200_CR107,0,630,1200_AL_.jpg",
       rate: 5,
-
+      trailer:"https://www.youtube.com/embed/UaVTIH8mujA",
       id: 3
     },
     {
@@ -45,7 +48,7 @@ export default function App() {
       posterUrl:
         "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
       rate: 2,
-
+      trailer:"https://www.youtube.com/embed/EXeTwQWrcwY",
       id: 4
     },
     {
@@ -55,7 +58,7 @@ export default function App() {
       posterUrl:
         "https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg",
       rate: 1,
-
+      trailer:"https://www.youtube.com/embed/_13J_9B5jEk",
       id: 5
     },
     {
@@ -65,7 +68,7 @@ export default function App() {
       posterUrl:
         "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
       rate: 5,
-
+      trailer:"https://www.youtube.com/embed/mxphAlJID9U",
       id: 6
     },
     {
@@ -74,7 +77,7 @@ export default function App() {
         "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales.",
       posterUrl: "https://www.miramax.com/media/assets/Pulp-Fiction1.png",
       rate: 5,
-
+      trailer:"https://www.youtube.com/embed/s7EdQ4FqbhY",
       id: 7
     },
     {
@@ -84,7 +87,7 @@ export default function App() {
       posterUrl:
         "https://upload.wikimedia.org/wikipedia/en/b/be/The_Lord_of_the_Rings_-_The_Return_of_the_King_%282003%29.jpg",
       rate: 5,
-
+      trailer:"https://www.youtube.com/embed/r5X-hFf6Bwo",
       id: 8
     },
     {
@@ -94,7 +97,7 @@ export default function App() {
       posterUrl:
         "https://cdn.hmv.com/r/w-1280/hmv/files/33/3385d6d7-570c-4baa-b344-552f9b6147f5.jpg",
       rate: 4,
-
+      trailer:"https://www.youtube.com/embed/WCN5JJY_wiA",
       id: 9
     },
     {
@@ -104,7 +107,7 @@ export default function App() {
       posterUrl:
         "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNgTszE1phYg2G7H4RrgeSEssOw-Kpnh0Si-sF5pVQQrBXJ_6e",
       rate: 3,
-
+      trailer:"https://www.youtube.com/embed/qtRKdVHc-cE",
       id: 10
     }
   ]);
@@ -113,14 +116,21 @@ export default function App() {
     setMovies([...movies, newMovie]);
   };
   return (
+    
     <div className="App">
       <NavBar setsearchTitle={setsearchTitle} setsearchRate={setsearchRate} />
-      <AddMovie addMovie={addMovie} />
-      <MovieList
-        movies={movies}
+      <AddMovie addMovie={addMovie}  />
+      <Routes>
+      
+      
+      <Route path='/' element ={<MovieList  movies={movies}
         searchTitle={searchTitle}
-        searchRate={searchRate}
+        searchRate={searchRate}/>}
+       
       />
+      <Route path='/details/:id' element={<Details  movies={movies} />} />
+      </Routes>
     </div>
+   
   );
 }
